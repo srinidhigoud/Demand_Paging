@@ -8,10 +8,10 @@ The number of references per process is 100
 The replacement algorithm is lru
 The level of debugging is 0
 
-Process 1 had 11 faults and 76.2222 average residency.
-Process 2 had 18 faults and 55.5625 average residency.
-Process 3 had 8 faults and 107.333 average residency.
-Process 4 had 17 faults and 68.6429 average residency.
+Process 1 had 9 faults and 100.143 average residency.
+Process 2 had 18 faults and 54.6875 average residency.
+Process 3 had 8 faults and 106.167 average residency.
+Process 4 had 15 faults and 76.25 average residency.
 
-The total number of page faults is 54 and the overall average residency is 70.6667.
+The total number of page faults is 50 and the overall average residency is 76.2927.
 

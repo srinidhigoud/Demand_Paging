@@ -1,7 +1,7 @@
 #include "Pager.h"
 #include <queue>
 #include <iostream>
-Pager::Pager(char* argv[], Frametable * frametable, Random* rand){
+Pager::Pager(char* argv[], Frametable * frametable, Random* rand){//Constructor
 	this->random = rand;
 	this->frametable = frametable;
 	machineSize = stoi(string(argv[1]));
@@ -13,8 +13,8 @@ Pager::Pager(char* argv[], Frametable * frametable, Random* rand){
 	printcheck = stoi(string(argv[7]));
 }
 
-void Pager::run(){
-	if(jobMix == 1) {
+void Pager::run(){//call this function to execute the pager
+	if(jobMix == 1) {//for the case when job mix is 1, simplest case, consecutive
 		processes.push_back(Process(processSize, 1, referenceNumber));
 		for(int runtime=1;runtime<=referenceNumber;runtime++){
 			
@@ -23,12 +23,13 @@ void Pager::run(){
 			processes[0].nextreference(1,0,0,random);
 		}
 	}
-	else if(jobMix==2 || jobMix==3 || jobMix==4 ){
-		queue<int> roundrobin;
+	else if(jobMix==2 || jobMix==3 || jobMix==4 ){//for cases when job mix is not 1
+		queue<int> roundrobin;//create a queue for round robin scheduling
 		for(int i=0;i<4;i++){
-			processes.push_back(Process(processSize,i+1,referenceNumber));
-			roundrobin.push(i);	
+			processes.push_back(Process(processSize,i+1,referenceNumber));//push 4 pricesses into the vector
+			roundrobin.push(i);	//for scheduling
 		} 
+		//allocate A,B,C values 
 		double A[4];
 		double B[4];
 		double C[4];
@@ -52,15 +53,16 @@ void Pager::run(){
 			A[2] = 0.75;	B[2] = 0.125;	C[2] = 0.125;
 			A[3] = 0.5;  	B[3] = 0.125;	C[3] = 0.125;
 		}
-		int runtime = 0;
-		while(!roundrobin.empty()){
+		int runtime = 0;//initiate the run time
+		while(!roundrobin.empty()){//while there are processes that still have references left 
 			int proc_number = roundrobin.front()+1;
-			if(processes[proc_number-1].hasended()) roundrobin.pop();
-			else if(processes[proc_number-1].hasfinishedquantum()){
+			if(processes[proc_number-1].hasended()) roundrobin.pop();//if process's reference size has reduced remove the process 
+			else if(processes[proc_number-1].hasfinishedquantum()){//if the process completed its quantum put it at the back, otherwise reduce its quantum and reference count size
 				roundrobin.pop();
 				roundrobin.push(proc_number-1);
 			}
 			else{
+				//otherwose increase runtime
 				runtime++;
 				int pagenumber = processes[proc_number-1].getnextWord() / pageSize;
 				if(frametable->pageFaultCheck(processes, pagenumber,proc_number, runtime)) frametable->pageReplacement(processes, pagenumber, proc_number, runtime, random);
@@ -72,7 +74,7 @@ void Pager::run(){
 		
 	}
 }
-
+//Print the entire allocated data
 void Pager::print(){
 	int totalpagefaults = 0;
 	int totalresidencytime = 0;

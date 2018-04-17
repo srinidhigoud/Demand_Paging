@@ -6,11 +6,11 @@
 Random::Random(char* argv[]){
 		k=0;
 		filename = "Random_Number.txt";
-		printcheck = (stoi(string(argv[7]))>1)?true:false;
+		printcheck = (stoi(string(argv[7]))>1)?true:false;//condition if this random needs to be printed or not
 	}
 
 void Random::reset(){
-		this->k = 0;
+		this->k = 0;//reset the value
 	}
 
 int Random::get(){
@@ -19,7 +19,7 @@ int Random::get(){
 		source.open(filename);
 		string line;
 		int i=0;
-		while(getline(source, line)){
+		while(getline(source, line)){//iterate to the present count in the text file and retrieve the random number
 			if(i==k){
 				istringstream iss(line);
 				iss>>n;
@@ -31,7 +31,7 @@ int Random::get(){
 				i++;
 			}
 		}
-		k++;
+		k++;//keep incrementing the present count so as to point to the next random number for next access
 		source.close();
 		if(printcheck) cout<<n<<endl;
 		return n;

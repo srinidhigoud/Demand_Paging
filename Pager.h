@@ -18,7 +18,7 @@ public:
 	Random* random;
 	Frametable* frametable;
 	string algorithm;
-	Pager(char* argv[], Frametable* frametable, Random* rand);
+	Pager(char* argv[], Frametable* frametable, Random* rand);//The main demand pager 
 	void run();
 	void print();
 };

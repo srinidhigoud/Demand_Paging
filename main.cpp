@@ -7,9 +7,7 @@
 
 
 ***************************************************/
-///g++ -std=c++11 -c main.cpp Tasks.cpp Bank.cpp OptimRes.cpp
-///g++ main.o Tasks.o Bank.o OptimRes.o
-///./a.out input1.txt
+
 
 
 #include <iostream>
@@ -25,7 +23,7 @@ using namespace std;
 int main(int argc, char* argv[]){
 	cout<<endl;
 	string ss(argv[6]);
-	Random* random = new Random(argv);
+	Random* random = new Random(argv);//create a random class objects that reads sequentially
 	Frametable* frame;
 	if(ss.compare("lru")==0) frame = new FrametableLRU(argv);
 	else if(ss.compare("fifo")==0) frame = new FrametableFIFO(argv);

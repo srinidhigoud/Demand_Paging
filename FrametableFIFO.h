@@ -12,7 +12,7 @@ public:
 	FrametableFIFO(char* argv[]);
 	int numberOfFrames;
 	deque<vector<int> > frametable;
-	bool pageFaultCheck(vector<Process>& processes, int pagenumber, int processnumber, int runtime);
-	void pageReplacement(vector<Process>& processes, int pagenumber, int processnumber, int currenttime, Random* random);
+	bool pageFaultCheck(vector<Process>& processes, int pagenumber, int processnumber, int runtime);//checks if there are page faults, return true if a page fault
+	void pageReplacement(vector<Process>& processes, int pagenumber, int processnumber, int currenttime, Random* random);//replaces frames accroding to the algorithm FIFO
 };
 #endif
