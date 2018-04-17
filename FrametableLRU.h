@@ -9,7 +9,7 @@ class FrametableLRU: public Frametable{
 public:
 	FrametableLRU(char* argv[]);
 	int numberOfFrames;
-	int **frametable;
+	deque<vector<int> > frametable;
 	bool pageFaultCheck(vector<Process>& processes, int pagenumber, int processnumber, int runtime);//checks if there are page faults, return true if a page fault
 	void pageReplacement(vector<Process>& processes, int pagenumber, int processnumber, int currenttime, Random* random);//replaces frames accroding to the algorithm LRU
 };
